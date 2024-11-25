@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Sakura Festivals</title>
+    <link rel="icon" href="sakura.png">
+    <style>
+        #map {
+            height: 600px; /* Set a height for the map */
+            width: 100%; /* Set width to 100% */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="jquery.modally.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.modally.js"></script>
+    <script src="js/keys.js"></script>
+    <script src="js/google-script.js"></script>
+    <script type="module" src="js/script.js"></script>
+    <script src="js/more-info.js"></script>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class="map-container">
+        <!-- Google Map -->
+        <div id="map" style="height: 100vh;"></div>
+        
+        <!-- The button to toggle the list visibility -->
+        <button id="toggleButton"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+        </svg></button>
+
+        <a href="#ipsum" target="_modal"><img id="toggleInfo" src="images/sakura_info.png" height="50px" data-toggle="" data-target="#ipsum" alt="Info Icon"></a>
+    
+        <div id="markerList"></div>  
+    </div>
+
+    <div id="lorem" style="display:none" class="modally-init" modally-max-width="1000">
+        <h4 id="modalTitle">Modal Title</h4>
+        <img id="modalImage" src="" alt="Image" style="width: 100%; height: auto;" />
+        <p id="modalAddress"></p>
+        <p id="modalEventDates"></p>
+        <p id="modalLink"></p>
+        <p id="modalInfo"></p>
+        <div class="button-wrap">
+            <button target="_modal:close" class="button small m-close btn">Close</button>
+        </div>
+    </div>
+
+    <div id="ipsum" style="display:none" class="modally-init" modally-max-width="1000">
+        <img src="images/japan_sakura.jpg" width="100%" height="auto">
+        <h4>What is the cherry blossom (sakura) festival?</h4>
+        <p>According to Wikipedia, "Hanami (花見, "flower viewing") is the Japanese traditional custom of enjoying the transient beauty of flowers; flowers (花, hana) in this case almost always refer to those of the cherry (桜, sakura) or, less frequently, plum (梅, ume) trees.[1] From the end of March to early May, cherry trees bloom all over Japan..." (Wikipedia). </p>
+        <p><img src="images/yap_sakura.png" class="float-start me-3" height="50px" width="auto" alt="Image">
+            <strong>Did you know?</strong><br>Sakura in Japan represent, "... mortality and the graceful and ready acceptance of destiny and karma" (Wikipedia). Japan Airlines elaborates, "The sakura's meaning is also contradictory. It symbolizes both life and death, beauty and violence. As the coming of spring promises new life, so the blooming of cherry blossoms brings a sense of vitality and vibrancy. At the same time, their short lifespan is a reminder that life is fleeting" (JAL).</p>
+    </div>
+
+    <script>
+        (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+          key: googleKey, // Regenerated
+          v: "weekly",
+          // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+          // Add other bootstrap parameters as needed, using camel case.
+        });
+    </script>
+</body>
+</html>

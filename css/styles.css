@@ -1,0 +1,307 @@
+:root {
+    --building-color: #FF9800;
+    --house-color: #0288D1;
+    --shop-color: #7B1FA2;
+    --warehouse-color: #558B2F;
+  }
+  
+  /*
+   * Optional: Makes the sample page fill the window.
+   */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    color:rgb(216, 121, 153);
+  }
+
+  a :hover{
+    color:rgb(184, 41, 88);
+  }
+  
+  /*
+   * Always set the map height explicitly to define the size of the div element
+   * that contains the map.
+   */
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+  
+  /*
+   * Property styles in unhighlighted state.
+   */
+  .property {
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    color: #263238;
+    display: flex;
+    font-size: 14px;
+    gap: 15px;
+    height: 30px;
+    justify-content: center;
+    padding: 4px;
+    position: relative;
+    position: relative;
+    transition: all 0.3s ease-out;
+    width: 30px;
+  }
+  
+  .property::after {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #FFFFFF;
+    content: "";
+    height: 0;
+    left: 50%;
+    position: absolute;
+    top: 95%;
+    transform: translate(-50%, 0);
+    transition: all 0.3s ease-out;
+    width: 0;
+    z-index: 1;
+  }
+  
+  .property .icon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+  }
+  
+  .property .icon svg {
+    height: 20px;
+    width: auto;
+  }
+  
+  .property .details {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .property .address {
+    color: #9E9E9E;
+    font-size: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  
+  .property .features {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .property .features > div {
+    align-items: center;
+    background: #F5F5F5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    font-size: 10px;
+    gap: 5px;
+    padding: 5px;
+  }
+  
+  /*
+   * Property styles in highlighted state.
+   */
+  .property.highlight {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    padding: 8px 15px;
+    width: auto;
+  }
+  
+  .property.highlight::after {
+    border-top: 9px solid #FFFFFF;
+  }
+  
+  .property.highlight .details {
+    display: flex;
+  }
+  
+  .property.highlight .icon svg {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .property .bed {
+    color: #FFA000;
+  }
+  
+  .property .bath {
+    color: #03A9F4;
+  }
+  
+  .property .size {
+    color: #388E3C;
+  }
+  
+  /*
+   * House icon colors.
+   */
+  .property.highlight:has(.fa-house) .icon {
+    color: var(--house-color);
+  }
+  
+  .property:not(.highlight):has(.fa-house) {
+    background-color: var(--house-color);
+  }
+  
+  .property:not(.highlight):has(.fa-house)::after {
+    border-top: 9px solid var(--house-color);
+  }
+  
+  /*
+   * Building icon colors.
+   */
+  .property.highlight:has(.fa-building) .icon {
+    color: var(--building-color);
+  }
+  
+  .property:not(.highlight):has(.fa-building) {
+    background-color: var(--building-color);
+  }
+  
+  .property:not(.highlight):has(.fa-building)::after {
+    border-top: 9px solid var(--building-color);
+  }
+  
+  /*
+   * Warehouse icon colors.
+   */
+  .property.highlight:has(.fa-warehouse) .icon {
+    color: var(--warehouse-color);
+  }
+  
+  .property:not(.highlight):has(.fa-warehouse) {
+    background-color: var(--warehouse-color);
+  }
+  
+  .property:not(.highlight):has(.fa-warehouse)::after {
+    border-top: 9px solid var(--warehouse-color);
+  }
+  
+  /*
+   * Shop icon colors.
+   */
+  .property.highlight:has(.fa-shop) .icon {
+    color: var(--shop-color);
+  }
+  
+  .property:not(.highlight):has(.fa-shop) {
+    background-color: var(--shop-color);
+  }
+  
+  .property:not(.highlight):has(.fa-shop)::after {
+    border-top: 9px solid var(--shop-color);
+  }
+
+  /* My Additions*/
+  .map-container {
+    position: relative;
+    height: 100vh; /* Ensures it takes up the full viewport height */
+  }
+
+  #markerList {
+    width: 300px; /* Set the width of the list */
+    max-height: 100%; /* Make the list fill the available vertical space */
+    overflow-y: auto; /* Enable vertical scrolling */
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-left: 1px solid #ccc; /* Optional: Add a border between the map and the list */
+    padding: 10px;
+    z-index: 10; /* Ensure it's on top of the map */
+    display: none; /* Initially hidden */
+}
+
+/* Style for each marker item in the list */
+.marker-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* Styling for the toggle button */
+#toggleButton {
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    color: rgb(82, 82, 82);
+    box-shadow: 0px 2px 1px rgb(65, 193, 221);
+    border: none;
+    padding: 7px;
+    border-radius: 1.5px;
+    cursor: pointer;
+    z-index: 20; /* Button should be above the list */
+    font-size: 16px;
+}
+
+#toggleButton svg {
+  size: 40px;
+}
+
+/* Hover effect for the button */
+#toggleButton:hover {
+    color: rgb(20, 20, 20);
+}
+
+#toggleButton :active {
+  right: 160px;
+}
+
+/* Styling for the toggle button */
+#toggleInfo {
+  position: absolute;
+  top: 10px;
+  right: 110px;
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  color: rgb(82, 82, 82);
+  box-shadow: 0px 2px 1px rgb(65, 193, 221);
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+  z-index: 20; /* Button should be above the list */
+  font-size: 16px;
+}
+
+#toggleInfo svg {
+size: 40px;
+}
+
+/* Hover effect for the button */
+#toggleButton:hover {
+  color: rgb(20, 20, 20);
+}
+
+#toggleButton :active {
+right: 160px;
+}
+
+button {
+  background-color: white;
+  color: rgb(82, 82, 82);
+  box-shadow: 0px 2px 1px rgb(65, 193, 221);
+}
+
+.m-close {
+  background-color:rgb(216, 121, 153);
+  color: white;
+  border-radius: rgb(216, 121, 153) solid 5px;
+}
